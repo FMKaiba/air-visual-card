@@ -210,14 +210,14 @@ class AirVisualCard extends HTMLElement {
         '5': '#A97ABC',
         '6': '#A87383',
       };
-      const AQIfaceColor = {
-        '1': `#B0E867`,
-        '2': '#E3C143',
-        '3': '#E48B4E',
-        '4': '#E45F5E',
-        '5': '#986EA9',
-        '6': '#A5516B',
-      };
+
+     
+     
+    
+    
+ 
+
+
       const AQIfontColor = {
         '1': `#718B3A`,
         '2': '#A57F23',
@@ -351,7 +351,7 @@ class AirVisualCard extends HTMLElement {
 
       if (!hideFace){
         card_content += `
-        <div class="face" id="face" style="background-color: ${AQIfaceColor[getAQI()]};">
+        <div class="face" id="face">
             <img src="${iconDirectory}/ic-face-${getAQI()}.svg"></img>
           </div>
         `;
