@@ -211,13 +211,6 @@ class AirVisualCard extends HTMLElement {
         '6': '#A87383',
       };
 
-     
-     
-    
-    
- 
-
-
       const AQIfontColor = {
         '1': `#718B3A`,
         '2': '#A57F23',
@@ -318,13 +311,14 @@ class AirVisualCard extends HTMLElement {
         // Check if APL is an WAQI sensor (because the state is an integer). Returns 'NaN' if it is not a number
         if (typeof hass.states[aplSensor.config] != "undefined") {
           if (parseInt(hass.states[aplSensor.config].state) != 'NaN') {
-            apl = APLdescription[getAQI()];      
+            apl = APLdescription[getAQI()];
           } else {
             apl = hass.states[aplSensor.config].state;
           }
-        }
+        } else {
+          apl = APLdescription[getAQI()];	
+	}
       };
-
 
       if (tempSensor.split('.')[0] == 'sensor') {
         tempValue = hass.states[tempSensor].state + 'º';
@@ -333,9 +327,6 @@ class AirVisualCard extends HTMLElement {
         tempValue = hass.states[tempSensor].attributes['temperature'] + 'º';
         currentCondition = hass.states[tempSensor].state;
       }
-
-
-
 
       let faceHTML = ``;
 
