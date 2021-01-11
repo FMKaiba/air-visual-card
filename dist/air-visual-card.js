@@ -70,7 +70,6 @@ class AirVisualCard extends HTMLElement {
           font-weight: 300;
           padding: .2em .2em;
           background-color: var(--background-color);
-          color: var(--text-color);
         }
 
         .temp {
@@ -80,7 +79,6 @@ class AirVisualCard extends HTMLElement {
           font-size: 1.7em;
           font-weight: 300;
           background-color: var(--background-color);
-          color: var(--text-color);
           padding: .2em .2em;
         }
 
@@ -335,8 +333,8 @@ class AirVisualCard extends HTMLElement {
         `;
       if (!hideTitle) {
         card_content += `
-        <div class="city">${city}</div>
-        <div class="temp"><ha-icon icon="${weatherIcons[currentCondition]}"></ha-icon>   ${tempValue}</div>
+        <div class="city" style="color: ${AQIfontColor[getAQI()]}">${city}</div>
+        <div class="temp" style="color: ${AQIfontColor[getAQI()]}"><ha-icon icon="${weatherIcons[currentCondition]}"></ha-icon>   ${tempValue}</div>
         `;
       }
 
