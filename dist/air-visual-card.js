@@ -1,3 +1,4 @@
+
 // To study:
 // Plant Picture Card: https://github.com/badguy99/PlantPictureCard/blob/master/dist/PlantPictureCard.js
 
@@ -188,7 +189,7 @@ class AirVisualCard extends HTMLElement {
       // value is used as a string instead of integer in order for 
       const aqiSensor = { name: 'aqiSensor', config: config.air_quality_index || null, value: 0 };
       const aplSensor = { name: 'aplSensor', config: config.air_pollution_level || null, value: 0 };
-      const mainPollutantSensor = { name: 'mainPollutantSensor', config: config.main_pollutant || null, value: 0 };
+      const mainPollutantSensor = { name: 'mainPollutantSensor', config: config.main_pollutant || 'pm25', value: 0 };
       const sensorList = [aqiSensor, aplSensor, mainPollutantSensor];
       const unitOfMeasurement = hass.states[aqiSensor.config] ? hass.states[aqiSensor.config].attributes['unit_of_measurement'] : 'AQI';
 
@@ -293,7 +294,10 @@ class AirVisualCard extends HTMLElement {
           } else {
             pollutantUnit = 'pollutant unit';
             mainPollutant = 'main pollutant';
-          }         
+          }
+        } else {
+          pollutantUnit = pollutantUnitValue['pm25'];
+          mainPollutant = mainPollutantValue['pm25'];
         }
         if (typeof hass.states[aqiSensor.config] != "undefined") {
           aqiSensor.value = hass.states[aqiSensor.config].state;
@@ -306,7 +310,7 @@ class AirVisualCard extends HTMLElement {
             apl = hass.states[aplSensor.config].state;
           }
         } else {
-          apl = APLdescription[getAQI()];	
+          apl = APLdescription[getAQI()];
 	}
       };
 
@@ -346,7 +350,7 @@ class AirVisualCard extends HTMLElement {
           </div>
         `;
       }
-      if (!hideAPL){        
+      if (!hideAPL){
         card_content += `
           <div class="aplSensor" id="aplSensor" style="background-color: ${AQIbgColor[getAQI()]}; color: ${AQIfontColor[getAQI()]}">
             ${apl}
@@ -354,11 +358,11 @@ class AirVisualCard extends HTMLElement {
             <div class="mainPollutantSensor" id="mainPollutantSensor">
               ${mainPollutant} | ${pollutantUnit}
             </div>
-          </div>     
+          </div>
         `;
       }
       card_content += `
-      </div> 
+      </div>
       `;
 
 
